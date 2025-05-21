@@ -1,0 +1,17 @@
+.navDiv {
+  background-color: rgb(151, 130, 130);
+  padding: 20px;
+}
+
+.navDiv a {
+  color: rgb(246, 241, 238);
+  margin: 0 20px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.navDiv a:hover,
+.navDiv a:focus {
+  color: rgb(116, 166, 241);
+  cursor: pointer;
+}

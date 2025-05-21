@@ -1,0 +1,25 @@
+.h2Title {
+  background-color: rgb(185, 193, 136);
+  color: rgb(37, 34, 213);
+  text-align: center;
+  margin: 20px;
+  padding: 10px;
+}
+
+.contentDiv {
+  background-color: rgb(237, 222, 222);
+  padding: 10px;
+  margin: 5px;
+}
+
+.contentDiv h3 {
+  color: rgb(233, 233, 243);
+  text-align: center;
+  background-color: rgb(139, 135, 135);
+  border-radius: 20px;
+}
+
+.contentDiv p {
+  padding-top: 13px;
+  padding-left: 13px;
+}
