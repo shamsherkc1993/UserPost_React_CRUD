@@ -12,6 +12,8 @@ const Header = () => {
      <Routes>
         <Route path='/' element={<AllUsers/>}/>
         <Route path='/AddUsers' element={<AddUsers />}/>
+        <Route path='/editUsers/:id' element={<AddUsers />}/>
+
         <Route path='/contact' element={<Contact/>}/>
      </Routes>
     </>
