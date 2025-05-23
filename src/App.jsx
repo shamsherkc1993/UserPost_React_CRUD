@@ -5,6 +5,7 @@ import Header from './components/Header'
 import { useEffect } from 'react'
 import { UserContext } from './components/UserContext'
 
+
 function App() {
   const [userDetail, setUserDetail] = useState([])
   const [loading, setLoading] = useState(false);
@@ -103,8 +104,8 @@ function App() {
   return (
     <>
     <UserContext.Provider value={{userDetail, setUserDetail, loading, setLoading, apiError, setApiError, allUsers, deleteUser, updateUser, setEditingUser, editingUser}}>
-      <Header/>
-      <Footer/>
+        <Header/>
+        <Footer/>
     </UserContext.Provider>
     </>
   )
