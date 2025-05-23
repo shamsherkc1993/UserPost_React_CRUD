@@ -45,6 +45,28 @@ function App() {
     }
   }
 
+  const deleteUser = async (id) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${URL}/${id}`, {
+        method: 'DELETE'
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to delete user');
+      }
+      
+      // Update the UI by removing the deleted user
+      setUserDetail(userDetail.filter(user => user.id !== id));
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      setApiError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   useEffect(()=>{
     allUsers()
     setLoading(true)
@@ -52,7 +74,7 @@ function App() {
   },[])
   return (
     <>
-    <UserContext.Provider value={{userDetail, setUserDetail, loading, setLoading, apiError, setApiError, allUsers}}>
+    <UserContext.Provider value={{userDetail, setUserDetail, loading, setLoading, apiError, setApiError, allUsers, deleteUser}}>
       <Header/>
       <Footer/>
     </UserContext.Provider>
