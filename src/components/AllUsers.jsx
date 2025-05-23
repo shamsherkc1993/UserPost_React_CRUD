@@ -7,9 +7,28 @@ import EditUserButton from './EditUserButton'
 import DeleteAddUser from './DeleteAddUser'
 
 const AllUsers = () => {
-  const {userDetail, loading, apiError, allUsers} = useContext(UserContext)
+  const {
+    userDetail, 
+    loading, 
+    apiError, 
+    allUsers,
+    updateUser,
+    editingUser,
+    setEditingUser
+  } = useContext(UserContext)
   // console.log(deleteUsers)
-  
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditingUser({
+      ...editingUser,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateUser(editingUser);
+  };
   return (
    <>
    <h2 className={style.h2Title}>User Posts</h2>
@@ -22,7 +41,7 @@ const AllUsers = () => {
           <div key={post.id}>
             <div className={style.contentDiv}>
               <h3>{post.title} <span style={{fontSize:'10px'}}>{post.id}</span></h3>
-              <p>{post.description} <EditUserButton/><DeleteAddUser userId={post.id}/></p>
+              <p>{post.description} <EditUserButton userId={post.id}/><DeleteAddUser userId={post.id}/></p>
             </div>
           </div>
         ))
@@ -41,6 +60,38 @@ const AllUsers = () => {
         </div>
       )}
       </Container>
+      <Modal show={!!editingUser} onHide={() => setEditingUser(null)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit User</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {editingUser && (
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="formTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="title"
+                  value={editingUser.title}
+                  onChange={handleEditChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  name="description"
+                  value={editingUser.description}
+                  onChange={handleEditChange}
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit" className="mt-3">
+                Save Changes
+              </Button>
+            </Form>
+          )}
+        </Modal.Body>
+      </Modal>
    </>
   )
 }

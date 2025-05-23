@@ -9,6 +9,7 @@ function App() {
   const [userDetail, setUserDetail] = useState([])
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState('');
+  const [editingUser, setEditingUser] = useState(null);
 
   
 
@@ -66,6 +67,33 @@ function App() {
     }
   };
 
+  const updateUser = async (updatedUser) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${URL}/${updatedUser.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedUser),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update user');
+      }
+      
+      setUserDetail(userDetail.map(user => 
+        user.id === updatedUser.id ? updatedUser : user
+      ));
+      setEditingUser(null);
+    } catch (error) {
+      console.error("Error updating user:", error);
+      setApiError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   useEffect(()=>{
     allUsers()
@@ -74,7 +102,7 @@ function App() {
   },[])
   return (
     <>
-    <UserContext.Provider value={{userDetail, setUserDetail, loading, setLoading, apiError, setApiError, allUsers, deleteUser}}>
+    <UserContext.Provider value={{userDetail, setUserDetail, loading, setLoading, apiError, setApiError, allUsers, deleteUser, updateUser, setEditingUser, editingUser}}>
       <Header/>
       <Footer/>
     </UserContext.Provider>

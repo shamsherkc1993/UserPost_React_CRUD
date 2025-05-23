@@ -6,6 +6,7 @@ import { UserContext } from './UserContext';
 const DeleteAddUser = ({userId}) => {
   
   const { deleteUser } = useContext(UserContext);
+
   const handleDelete = () => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       console.log('Deleting user with ID:', userId);
