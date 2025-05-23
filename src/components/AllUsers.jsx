@@ -21,8 +21,8 @@ const AllUsers = () => {
         userDetail.map((post) => (
           <div key={post.id}>
             <div className={style.contentDiv}>
-              <h3>{post.title}</h3>
-              <p>{post.description} <EditUserButton/><DeleteAddUser/></p>
+              <h3>{post.title} <span style={{fontSize:'10px'}}>{post.id}</span></h3>
+              <p>{post.description} <EditUserButton/><DeleteAddUser userId={post.id}/></p>
             </div>
           </div>
         ))
